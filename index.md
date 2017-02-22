@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# デレステ解析ノート
 
-You can use the [editor on GitHub](https://github.com/Ishotihadus/deresute-analysis-notes/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## 本ノートに関して
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+このノートはデレステにまつわる解析にもとづく知見をまとめたものである。
 
-### Markdown
+逆コンパイルして得られた情報のほか、デレステを解析して作られた様々なウェブサイトにあるソースコードも対象として分析を行い、そこから得られた情報をなるべく整理してまとめたものになる。
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+デレステは広くユーザー数がおり、解析により作られたウェブサイトも多数存在する一方、第一言語である日本語でまとめられた情報はほとんどなく、手当たり次第に探ることが多いのも現状である。
 
-```markdown
-Syntax highlighted code block
+本ノートはユーザーが広くデレステ内部のデータを分析できるよう、改めてその知見を集合させたものである。
 
-# Header 1
-## Header 2
-### Header 3
+## 二次利用に関して
 
-- Bulleted
-- List
+本ノートにより得られた情報をもとに、ツールやウェブサイトを構築することは、その良心の限り許される。
 
-1. Numbered
-2. List
+なお本ノートを焼き直ししたテキストおよび同人誌の存在は、その有用性の観点からいって不適切であろう。
 
-**Bold** and _Italic_ and `Code` text
+ただし本ノートの他言語への翻訳はその限りではないだろう。
 
-[Link](url) and ![Image](src)
-```
+## コンテンツ
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+- [ユーザーデータの通信（API）](user/index.md)
 
-### Jekyll Themes
+## サポート
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Ishotihadus/deresute-analysis-notes/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+[Twitter](https://twitter.com/Ishotihadus) まで。
