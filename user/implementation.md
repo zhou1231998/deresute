@@ -44,9 +44,8 @@ end
 def decrypt_rj256(s, key, iv)
     r = Crypt::Rijndael.new(key, key.length * 8, iv.length * 8)
     blocks = s.each_char.each_slice(iv.length).map(&:join)
-    out = [iv]
-    blocks.each{|b| out << (r.decrypt_block(b) ^ out.last)}
-    out[1..-1].join.split("\0").first
+    decrypted = blocks.map{|b| r.decrypt_block(b)}.join
+    ((iv + s)[0, decrypted.length] ^ decrypted).split("\0").first
 end
 ```
 
