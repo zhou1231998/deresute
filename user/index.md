@@ -9,4 +9,5 @@
 ## コンテンツ
 
 - [ユーザーデータの通信概要](general.md)
+- [API通信の実装](implementation.md)
 - [エンドポイント一覧](endpoints.md)
