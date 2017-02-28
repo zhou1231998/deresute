@@ -10,7 +10,7 @@ LZ4 は解凍した後とする。
 
 なおこのページでは UnityRaw フォーマット以外は扱わない（他に UnityWeb フォーマットおよび UnityFS フォーマットがある）。
 
-本ページの執筆にあたっては [HearthSim/UnityPack](https://github.com/HearthSim/UnityPack) を参考にした。
+本ページの執筆にあたっては [HearthSim/UnityPack](https://github.com/HearthSim/UnityPack) を参考にした。特別な理由（たとえば宗教上の理由で Python が使えない場合など）がなければこのライブラリを使うのがよいだろう。
 
 ## ヘッダ
 
@@ -62,7 +62,7 @@ LZ4 は解凍した後とする。
 - Format が 13 以上のとき
     - Byte HasTypeTrees：TypeTree を持つか（例：1）
     - Int32 TypeTreeCount：TypeTree の数（例：2）
-    - 以下 TypeTreeCount の回数
+    - HasTypeTrees が true の場合、以下 TypeTreeCount の回数
         - Int32 ClassId：クラスID（例：28）
         - Byte[] Hash：ハッシュ値（ClassId が 0 未満であれば 0x20 バイト、0 以上であれば 0x10 バイト）
         - TypeTree Tree
@@ -151,10 +151,56 @@ TypeTree はその名の通り木構造になっている。Depth の個数だ�
 
 これでオブジェクトのすべての情報が読み込み終わる。
 
-オブジェクトにはそれぞれ TypeTree が割り当てられる。TypeMetadata 内の ClassId にオブジェクトの TypeId と同じものがある場合、対応する TypeTree がオブジェクトの TypeTree になる。存在しない場合はデフォルトの設定からオブジェクトの ClassId と同じ ClassId の TypeTree を割り当てる（__TypeId ではない__）。
+オブジェクトにはそれぞれ TypeTree が割り当てられる。TypeMetadata 内の ClassId にオブジェクトの TypeId もしくは ClassId と同じものがある場合、対応する TypeTree がオブジェクトの TypeTree になる。存在しない場合はデフォルトの設定からオブジェクトの ClassId と同じ ClassId の TypeTree を割り当てる（__TypeId ではない__）。
 
 ## オブジェクト
 
 オブジェクトの位置は、アセットの MetadetaSize の位置からさらにアセットの DataOffset およびオブジェクトの DataOffset を進めた位置にある。上の例では 0x70 + 0x1000 + 0xa8 = 0x1118 になる。
 
-ここからさらに型別に処理される。もうバイナリ読みたくない。
+あとは対応する TypeTree の順序で読み込んで行けばよい。データのサイズは TypeTree で定義されている Size になる（-1 の場合もある）。
+
+ただし IsArray が true の場合（基本的に Array 型）は、子ノードに size と data フィールドがあり、size の個数分 data フィールドがある形になる。
+
+文字列は Array を中に内包する形で実現している。たとえば、
+
+- string m_Name
+    - Array Array
+        - int size
+        - char data
+
+のような形である。
+
+なお数値型や真偽値型などはわかりきっているので、[文字列テーブル](unity3d-string.md) を確認しつつ実装するとよい。
+
+## Texture2D 型
+
+一番抽出されがちな画像は Texture2D 型である。Texture2D 型は TypeTree が以下のような構造になっている。
+
+- Texture2D Base
+    - string m_Name
+        - Array Array
+            - int size
+            - char data
+    - int m_Width
+    - int m_Height
+    - int m_CompleteImageSize
+    - int m_TextureFormat
+    - bool m_MipMap
+    - bool m_IsReadable
+    - bool m_ReadAllowed
+    - int m_ImageCount
+    - int m_TextureDimension
+    - GLTextureSettings m_TextureSettings
+        - int m_FilterMode
+        - int m_Aniso
+        - float m_MipBias
+        - int m_WrapMode
+    - int m_LightmapFormat
+    - int m_ColorSpace
+    - TypelessData image data
+        - int size
+        - UInt8 data
+
+実際のバイナリデータは image data にあって、そのフォーマットは m_TextureFormat で決まっている。フォーマットは 7（RGB565）、13（RGBA4444）、34（ETC_RGB4）あたりが使われている。フォーマットの一覧およびそれぞれのバイナリフォーマットは [Unity の unity3d の Texture2D](unity3d-texture2d.md) を参照されたい。
+
+細かい話は [スクリプトリファレンス](https://docs.unity3d.com/560/Documentation/ScriptReference/TextureFormat.html) を参考にすればよい。
