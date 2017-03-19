@@ -4,11 +4,11 @@
 
 基本的には http://storage.game.starlight-stage.jp/ 以下の URL を触ることになる。
 
-どうでもいいが http://storages.game.starlight-stage.jp/ でも同じデータに触れるみたい。
+どうでもいいが https://storages.game.starlight-stage.jp/ でも同じデータに触れるみたい（こちらは HTTPS 用になっている）。
 
 ## リソースバージョン
 
-デレステにはリソースにバージョンがついている。たとえば 10024000 などである。
+デレステにはリソースにバージョンがついている。たとえば 10024100 などである。
 
 「新しいダウンロードデータがあります」とポップアップされるときは、このリソースバージョンが上がったタイミングである。
 
@@ -78,6 +78,8 @@ bdb（Blob DB）と mdb（Master DB）はともに SQLite の形式である。
 
 またファイル名にディレクトリが入る場合は、URL にこのディレクトリが入る。たとえば v/card_100174.acb であれば、URL は http://storage.game.starlight-stage.jp/dl/resources/High/Sound/Common/v/18f3a52b79f19ce6887110f8642f72f3 となる。
 
+なおマニフェストに載っているものの 404 Not Found が返ってくるデータが一部存在する。
+
 ### アセットバンドル
 
 URL は http://storage.game.starlight-stage.jp/dl/resources/High/AssetBundles/Android/ 。
@@ -91,7 +93,5 @@ URL は http://storage.game.starlight-stage.jp/dl/resources/High/Sound/Common/ �
 実装されればおそらく URL は http://storage.game.starlight-stage.jp/dl/resources/High/Movie/Common/ 。
 
 ### バイナリ DB、マスター DB
-
-バイナリ DB の方は Not Found が返ってくる場合がある。
 
 URL は http://storage.game.starlight-stage.jp/dl/resources/Generic/ 。

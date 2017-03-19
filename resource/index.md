@@ -7,3 +7,4 @@
 - [マニフェストとリソースの取得方法](get.md)
 - [リソースフォーマット](format.md)
     - [unity3d ファイルのバイナリフォーマット](unity3d.md)
+    - [CRI Middleware 製ファイルのバイナリフォーマット](criware.md)

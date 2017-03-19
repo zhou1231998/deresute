@@ -20,6 +20,8 @@
 
 なお Ruby では [extlz4](https://rubygems.org/gems/extlz4/versions/0.2.1) という gem の `LZ4::raw_decode` を用いることで解凍できる。
 
+ヘッダを合わせることで通常の LZ4 コマンドに適応するファイルにすることもできる。ただこの場合解凍後のファイルサイズが 4MB を超えたときに対応できない。
+
 ## SQLite
 
 一般的なファイルフォーマットなので省略。
@@ -41,4 +43,4 @@ unity3d ファイルは Unity のアセットバンドルのフォーマット�
 
 [CRI Middleware](http://www.cri-mw.co.jp/index.html) の制作したフォーマット。
 
-ドキュメントは未作成。
+詳細は [CRI Middleware 製ファイルのバイナリフォーマット](criware.md) を参照のこと。

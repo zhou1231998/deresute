@@ -10,7 +10,7 @@ LZ4 は解凍した後とする。
 
 なおこのページでは UnityRaw フォーマット以外は扱わない（他に UnityWeb フォーマットおよび UnityFS フォーマットがある）。
 
-本ページの執筆にあたっては [HearthSim/UnityPack](https://github.com/HearthSim/UnityPack) を参考にした。特別な理由（たとえば宗教上の理由で Python が使えない場合など）がなければこのライブラリを使うのがよいだろう。
+本ページの執筆にあたっては [HearthSim/UnityPack](https://github.com/HearthSim/UnityPack) を参考にした。ある程度はこのライブラリが使えるが、結構な頻度で例外を発生するので少しアレかもしれない。
 
 ## ヘッダ
 
@@ -99,7 +99,7 @@ TypeTrees はハッシュになっており、クラスID => 構造体 の形を
     - 以下 NumNodes の回数
         - 再帰的にこれらのフィールドが続く
 
-ノードにある `Type` および `Name` はテーブルのオフセット値で、以下の条件で生成する。
+ノードにある Type および Name はテーブルのオフセット値で、以下の条件で生成する。
 
 - 0 未満のとき
     - 一番上のビットを 0 にしたものを値とする
@@ -201,6 +201,6 @@ TypeTree はその名の通り木構造になっている。Depth の個数だ�
         - int size
         - UInt8 data
 
-実際のバイナリデータは image data にあって、そのフォーマットは m_TextureFormat で決まっている。フォーマットは 7（RGB565）、13（RGBA4444）、34（ETC_RGB4）あたりが使われている。フォーマットの一覧およびそれぞれのバイナリフォーマットは [Unity の unity3d の Texture2D](unity3d-texture2d.md) を参照されたい。
+実際のバイナリデータは image data にあって、そのフォーマットは m_TextureFormat で決まっている。フォーマットは 7（RGB565）、13（RGBA4444）、34（ETC_RGB4）あたりが使われている。フォーマットの一覧およびそれぞれのバイナリフォーマットは [unity3d の Texture2D](unity3d-texture2d.md) を参照されたい。なおデータは左下のピクセルから埋まる。
 
 細かい話は [スクリプトリファレンス](https://docs.unity3d.com/560/Documentation/ScriptReference/TextureFormat.html) を参考にすればよい。
